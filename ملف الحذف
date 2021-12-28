@@ -1,0 +1,16 @@
+$mid = $message->message_id;
+$expdel = explode(' ', $text);
+if($expdel[0] == "حذف" and isset($expdel[1]) and $expdel[1] < 100){
+for($y = $mid - $expdel[1]; $y < $mid; $y++){
+bot('deleteMessage',['chat_id'=>$chat_id,'message_id'=>$y]);}
+bot('deleteMessage',['chat_id'=>$chat_id,'message_id'=>$mid,]);
+bot('sendMessage',['chat_id'=>$chat_id,
+'text'=>"تم حذف ( $expdel[1] ) من الرسائل 🗑",
+'parse_mode'=>"MarkDown",
+'disable_web_page_preview'=>true,]);}
+if($expdel[0] == "حذف" and isset($expdel[1]) and $expdel[1] > 100){
+ bot('sendMessage',['chat_id'=>$chat_id,
+'text'=>"لا يمكن حذف اكثر من 100 🗑🚫.",
+'reply_to_message_id'=>$mid,
+'parse_mode'=>"MarkDown",
+'disable_web_page_preview'=>true,]);}
